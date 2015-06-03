@@ -44,9 +44,9 @@ module Codebreaker234
         game.instance_variable_set(:@secret_code, "1214")
         expect(game.mark_user_guess("1561")).to eq("+-")
       end
-      it "can puts '-' between two '+' if not exect match (one or two) is between exect matches" do
+      it "puts all '-' after '+', even if not exect match (one or two) is between exect matches" do
         game.instance_variable_set(:@secret_code, "1214")
-        expect(game.mark_user_guess("1524")).to eq("+-+")
+        expect(game.mark_user_guess("1524")).to eq("++-")
       end
     end
 

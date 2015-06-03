@@ -22,25 +22,40 @@ module Codebreaker234
 
     def mark_user_guess(user_input)
     	answer = ""
-      tmp_code = ""
       tmp_input = ""
+      tmp_code = ""
       for i in 0...SECRET_CODE_LENGTH
         if user_input[i] == @secret_code[i]
-          tmp_code << "+"
-          tmp_input << "+"
+          answer << "+"
         else 
           tmp_input << user_input[i]
           tmp_code << @secret_code[i]
         end 
       end
-    	for i in 0...SECRET_CODE_LENGTH
-    		if tmp_input[i] == tmp_code[i]
-    			answer << "+"
-    		elsif tmp_code.include? tmp_input[i]
-    			answer << "-"
-    		end	
-    	end
+      if tmp_code.size > 0 
+      	for i in 0...tmp_code.size
+      		if tmp_code.include? tmp_input[i]
+      			answer << "-"
+      		end	
+      	end
+      end
       return answer
+    end
+
+    def analize(user_input)
+      marked_guess = mark_user_guess(user_input)
+      if user_input.match(/^[1-6]{4}$/)
+        user_guesses_and_answers << {user_input => marked_guess}
+        decrease_avaliable_turns
+      else 
+        user_guesses_and_answers << {user_input => "Wrong guess. Pls enter exectly 4 numbers. Each from 1 to 6."}
+      end
+
+      if marked_guess == "++++"
+        game_status = "win"         
+      elsif number_of_turns <= 0
+        game_status = "lose"
+      end
     end
 
     def hint
