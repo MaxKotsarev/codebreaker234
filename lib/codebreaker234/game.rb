@@ -52,9 +52,9 @@ module Codebreaker234
       end
 
       if marked_guess == "++++"
-        game_status = "win"         
+        @game_status = "win"         
       elsif number_of_turns <= 0
-        game_status = "lose"
+        @game_status = "lose"
       end
     end
 

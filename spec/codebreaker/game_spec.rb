@@ -70,6 +70,9 @@ module Codebreaker234
       end 
     end
 
+    describe "#analize" do
+    end
+
     describe "score" do
       it "return score counted by formula 'score = available_turns * 10 + available_hints * 30' (test 1)" do
         game.instance_variable_set(:@number_of_turns, 10) 
